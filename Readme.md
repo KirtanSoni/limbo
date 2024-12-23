@@ -19,9 +19,11 @@ comments with TODO require Attention
 ## Strategy
 
 - first we should build a chat app that an ai is able to participate in. and test it out.
+
+
 ![alt text](/docs/img/image.png)
 
-
+![alt text](image.png)
 
 Using WebRTC - SFU (Selective forwarding unit)
 
