@@ -3,13 +3,16 @@ play dnd with AI as your game master.
  
 ## Start Instructions
 
+### Makefile has all instructions
 ```
-cd frontend
-npm run build
+make 
+./limbo  or ./limbo.exe
+```
+### React Dev Mode ( for Hot-Reload )
+```
+make fdev
+```
 
-cd ..
-go run .
-```
 ### #TODO
 comments with TODO require Attention 
 
