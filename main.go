@@ -38,10 +38,13 @@ func main() {
 	dist, err := fs.Sub(reactApp,"frontend/dist")
 
 	if err != nil {
+		log.Print("React Build Not found!!")
 		panic(err)
 	}
 	frontend:=http.FileServer(http.FS(dist))
 	mux.Handle("GET /", frontend)
 	wrappedmux := NewLogger(mux)
+
+	log.Println("Starting Server....")
 	http.ListenAndServe(*addr, wrappedmux)
 }
