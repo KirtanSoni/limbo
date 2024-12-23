@@ -10,6 +10,10 @@ fdev:
 	cd frontend && npm install
 	cd frontend && npm run dev
 
+bdev:
+	go mod tidy
+	go run .
+
 clean:
 	rm -f $(BINARY_NAME)
 	rm -f $(BINARY_NAME).exe

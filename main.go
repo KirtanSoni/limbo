@@ -34,7 +34,7 @@ var (
 	mu       = sync.RWMutex{}
 )
 
-//  middleware
+// middleware
 type Logger struct {
 	handler http.Handler
 }
@@ -48,8 +48,6 @@ func (l *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func NewLogger(handlerToWrap http.Handler) *Logger {
 	return &Logger{handlerToWrap}
 }
-
-
 
 func main() {
 	flag.Parse()
@@ -71,15 +69,15 @@ func main() {
 
 	// add middleware
 	wrappedmux := NewLogger(mux)
-	
-	log.Println("Starting Server....")
+
+	log.Println("Starting Server at :8080 ....")
 	go startDebugCLI()
 	http.ListenAndServe(*addr, wrappedmux)
 }
 
 // Handlers
 func CreateRoomHandler(w http.ResponseWriter, r *http.Request) {
-	
+
 	const letterBytes = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	code := make([]byte, 6)
 	for i := range code {
@@ -127,7 +125,7 @@ func serveWS(Room *Room, w http.ResponseWriter, r *http.Request) {
 	client := &Client{Room, conn, &sync.Mutex{}}
 	Room.JoinClient(client)
 	defer Room.KickClient(client)
-	
+
 	var wg sync.WaitGroup
 	wg.Add(1)
 	go func() {
@@ -146,7 +144,7 @@ func serveWS(Room *Room, w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 }
 
-// Structs 
+// Structs
 type Client struct {
 	*Room
 	*websocket.Conn
@@ -174,7 +172,6 @@ type BroadcastMessage struct {
 }
 
 type Message []byte
-
 
 // room threadsafe join and leave
 func (r *Room) JoinClient(c *Client) {
@@ -212,8 +209,6 @@ func (r *Room) Run() {
 	}
 }
 
-
-
 func DeleteRoom(r *Room) {
 	mu.Lock()
 	defer mu.Unlock()
@@ -243,7 +238,6 @@ func CreateNewRoom(code string) error {
 	go allRooms[code].Run()
 	return nil
 }
-
 
 // debug CLI
 func startDebugCLI() {
